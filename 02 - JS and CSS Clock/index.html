@@ -104,7 +104,7 @@
 
       const secAngle = (seconds * 6) + 90;
       const minAngle = (minutes * 6) + 90;
-      const horAngle = ((hours % 12) * 30) + 90 + minAngle/12;
+      const horAngle = ((hours % 12) * 30) + minutes/2 + 90 ;
 
       // Remove transition to get rid of glitch
       if (seconds == 0 || minutes == 0 || hours % 12 == 0){
