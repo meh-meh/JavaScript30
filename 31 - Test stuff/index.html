@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node Question</title>
+</head>
+<body>
+  <p><em>Psst: have a look at the JavaScript Console (F12 in Chrome)</em> 💁</p>
+  <script>
+    class Node {
+      constructor(data, children) {
+        this.data = data;
+        this.children = children;
+      }
+    }
+    var jnode = new Node('J');
+    var inode = new Node('I');
+    var hnode = new Node('H',[jnode]);
+    var gnode = new Node('G');
+    var fnode = new Node('F');
+    var enode = new Node('E',[inode]);
+    var dnode = new Node('D');
+    var cnode = new Node('C',[gnode,hnode]);
+    var bnode = new Node('B',[dnode,enode,fnode]);
+    var anode = new Node('A',[bnode,cnode]);
+
+    function printNodeStructure (node, depth, breadthArr) {
+      var returnString = ""
+      var childrenString = "";
+      if (depth == null){
+        depth = 0;
+        var breadthArr = [];
+        breadthArr[depth] = node.data;
+      }
+      if (typeof(breadthArr[depth+1]) == 'undefined'){
+        breadthArr[depth+1] = '';
+      }
+      if (typeof(node.children) != 'undefined'){
+        for (let childNode of node.children) {
+          breadthArr[depth+1] += childNode.data;
+          printNodeStructure(childNode, depth + 1, breadthArr);
+        }
+      }
+
+      if (depth == 0){
+        breadthArr.pop();
+        return breadthArr.join(',');
+      }
+    }
+
+  </script>
+</body>
+</html>
