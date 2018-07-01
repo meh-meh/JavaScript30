@@ -54,7 +54,29 @@
   </div>
 
 <script>
+const topPic = document.querySelector('header');
+const navBar = document.querySelector('#main');
+const barTopDefault = navBar.offsetTop;
 
+// if scroll position is more than barTop, we change barTop to scroll
+function updateNav(){
+  if(window.scrollY >= barTopDefault) {
+    // navBar.style.top = `${window.scrollY}px`;
+    // navBar.classList = 'navscroll';
+    document.body.style.paddingTop = `${navBar.offsetHeight}px`;
+    document.body.classList.add('navscroll');
+  }
+  else {
+    // navBar.style.top = 0;
+    // navBar.classList = '';
+    document.body.style.paddingTop = 0;
+    document.body.classList.remove('navscroll');
+  }
+  console.log(window.scrollY);
+}
+
+// listen for scroll event and call function
+document.addEventListener('scroll', updateNav);
 </script>
 
 </body>
