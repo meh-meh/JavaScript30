@@ -24,27 +24,30 @@
 
     function setSpeed(e) {
       if (!isDown) return;
-      const y = e.pageY - this.offsetTop;
-      const percent = y / this.offsetHeight;
       const min = 0.4;
       const max = 4;
+
+      const y = e.pageY - speed.offsetTop;
+      let percent = y / speed.offsetHeight;
+      if (percent < 0.0) percent = 0;
+      if (percent > 1.0) percent = 1;
+
       const height = Math.round(percent * 100) + '%';
       const playbackRate = percent * (max - min) + min;
+
       bar.style.height = height;
       bar.textContent = playbackRate.toFixed(2) + 'x';
       video.playbackRate = playbackRate;
-      // console.log(playbackRate);
-      // console.log(percent);
     }
-
-    speed.addEventListener('mousemove', setSpeed);
+    // document.addEventListener('mousemove', setSpeed);
+    document.addEventListener('mousemove', (e) => isDown && setSpeed(e));
 
     speed.addEventListener('mousedown', () => {
       isDown = true;
     });
     speed.addEventListener('mousedown', setSpeed);
 
-    speed.addEventListener('mouseup', () => {
+    document.addEventListener('mouseup', () => {
       isDown = false;
     });
   </script>
